@@ -1,0 +1,220 @@
+/* /public/assets/css/components/modals.css */
+
+/* Modal Container */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: var(--z-modal);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s var(--transition-smooth);
+    backdrop-filter: blur(4px);
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Modal Content */
+.modal {
+    background: var(--bg-primary);
+    border-radius: 1rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+                0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    transform: scale(0.95);
+    opacity: 0;
+    transition: all 0.3s var(--transition-smooth);
+}
+
+.modal-overlay.active .modal {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* Modal Sizes */
+.modal-sm { max-width: 300px; }
+.modal-lg { max-width: 800px; }
+.modal-xl { max-width: 1140px; }
+.modal-full { max-width: 100%; margin: 1.5rem; }
+
+/* Modal Sections */
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.modal-title {
+    font-size: var(--text-xl);
+    font-weight: var(--font-semibold);
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.modal-close {
+    background: transparent;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: all 0.2s var(--transition-smooth);
+}
+
+.modal-close:hover {
+    color: var(--text-primary);
+    transform: rotate(90deg);
+}
+
+.modal-body {
+    padding: 1.5rem;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.modal-footer {
+    padding: 1.25rem 1.5rem;
+    border-top: 1px solid var(--border-light);
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+}
+
+/* Scrollbar Styles for Modal Body */
+.modal-body::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+.modal-body::-webkit-scrollbar-track {
+    background: var(--neutral-100);
+    border-radius: 0.25rem;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+    background: var(--neutral-300);
+    border-radius: 0.25rem;
+}
+
+/* Modal Variants */
+.modal-glass {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+.modal-borderless {
+    border: none;
+}
+
+.modal-borderless .modal-header,
+.modal-borderless .modal-footer {
+    border: none;
+}
+
+/* Modal Animations */
+@keyframes modalZoomIn {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes modalZoomOut {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+}
+
+.modal-enter {
+    animation: modalZoomIn 0.3s var(--transition-smooth);
+}
+
+.modal-leave {
+    animation: modalZoomOut 0.3s var(--transition-smooth);
+}
+
+/* Modal Side Panel */
+.modal-side {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    max-width: 400px;
+    height: 100vh;
+    transform: translateX(100%);
+}
+
+.modal-side.active {
+    transform: translateX(0);
+}
+
+/* Loading State */
+.modal-loading::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+    .modal {
+        width: 95%;
+        margin: 1rem;
+    }
+
+    .modal-side {
+        max-width: 100%;
+    }
+
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: 1rem;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .modal {
+        background: var(--neutral-800);
+    }
+
+    .modal-glass {
+        background: rgba(0, 0, 0, 0.8);
+    }
+
+    .modal-body::-webkit-scrollbar-track {
+        background: var(--neutral-700);
+    }
+
+    .modal-body::-webkit-scrollbar-thumb {
+        background: var(--neutral-600);
+    }
+
+    .modal-loading::after {
+        background: rgba(0, 0, 0, 0.7);
+    }
+}

@@ -1,0 +1,224 @@
+/* /public/assets/css/components/alerts.css */
+
+/* Base Alert Styles */
+.alert {
+    position: relative;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    animation: alertSlideIn 0.3s var(--transition-smooth);
+}
+
+/* Alert Variants */
+.alert-primary {
+    background-color: var(--primary-50);
+    border-left: 4px solid var(--primary-500);
+    color: var(--primary-700);
+}
+
+.alert-success {
+    background-color: var(--success-light);
+    border-left: 4px solid var(--success);
+    color: var(--success-dark);
+}
+
+.alert-warning {
+    background-color: var(--warning-light);
+    border-left: 4px solid var(--warning);
+    color: var(--warning-dark);
+}
+
+.alert-error {
+    background-color: var(--error-light);
+    border-left: 4px solid var(--error);
+    color: var(--error-dark);
+}
+
+.alert-info {
+    background-color: var(--info-light);
+    border-left: 4px solid var(--info);
+    color: var(--info-dark);
+}
+
+/* Glass Alert Variant */
+.alert-glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-primary);
+}
+
+/* Alert Content */
+.alert-icon {
+    flex-shrink: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.alert-title {
+    font-weight: var(--font-semibold);
+    margin-bottom: 0.25rem;
+}
+
+.alert-content {
+    flex-grow: 1;
+}
+
+.alert-message {
+    font-size: var(--text-sm);
+    margin: 0;
+}
+
+/* Dismissible Alert */
+.alert-dismissible {
+    padding-right: 3rem;
+}
+
+.alert-close {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    padding: 0.25rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: all 0.2s var(--transition-smooth);
+}
+
+.alert-close:hover {
+    opacity: 1;
+}
+
+/* Alert Animations */
+@keyframes alertSlideIn {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes alertSlideOut {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}
+
+/* Toast Notifications */
+.toast-container {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: var(--z-modal);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.toast {
+    max-width: 350px;
+    animation: toastSlideIn 0.3s var(--transition-smooth);
+}
+
+@keyframes toastSlideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Alert with Progress Bar */
+.alert-progress {
+    position: relative;
+    overflow: hidden;
+}
+
+.alert-progress::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    background: currentColor;
+    opacity: 0.2;
+    animation: alertProgress 3s linear;
+}
+
+@keyframes alertProgress {
+    from { width: 100%; }
+    to { width: 0; }
+}
+
+/* Alert Sizes */
+.alert-sm {
+    padding: 0.5rem 1rem;
+    font-size: var(--text-sm);
+}
+
+.alert-lg {
+    padding: 1.5rem 2rem;
+}
+
+/* Alert Groups */
+.alert-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .alert-glass {
+        background: rgba(0, 0, 0, 0.3);
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .alert-primary {
+        background-color: rgba(99, 102, 241, 0.1);
+    }
+
+    .alert-success {
+        background-color: rgba(16, 185, 129, 0.1);
+    }
+
+    .alert-warning {
+        background-color: rgba(245, 158, 11, 0.1);
+    }
+
+    .alert-error {
+        background-color: rgba(239, 68, 68, 0.1);
+    }
+
+    .alert-info {
+        background-color: rgba(59, 130, 246, 0.1);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+    .toast-container {
+        left: 1rem;
+        right: 1rem;
+    }
+
+    .toast {
+        max-width: none;
+    }
+}
